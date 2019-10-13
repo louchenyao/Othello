@@ -16,3 +16,14 @@ cc_test(
         "@gtest//:gtest_main",
     ]
 )
+
+cc_binary(
+    name = "bench",
+    srcs = ["ssfe_benchmarks/othello_bench.cpp"],
+    copts = COPTS,
+    deps = [
+        ":othello",
+        "@benchmark//:benchmark",
+        "@benchmark//:benchmark_main",
+    ]
+)
