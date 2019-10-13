@@ -1,0 +1,32 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: install bazel
+      run: |
+        sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python
+        wget https://github.com/bazelbuild/bazel/releases/download/0.29.1/bazel-0.29.1-installer-linux-x86_64.sh
+        chmod +x bazel-0.29.1-installer-linux-x86_64.sh
+        sudo ./bazel-0.29.1-installer-linux-x86_64.sh
+    - name: build
+      run: bazel build //...
+    - name: test
+      run: bazel run //:test
+      
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: install bazel
+      run: |
+        sudo apt-get -y install pkg-config zip g++ zlib1g-dev unzip python
+        wget https://github.com/bazelbuild/bazel/releases/download/0.29.1/bazel-0.29.1-installer-linux-x86_64.sh
+        chmod +x bazel-0.29.1-installer-linux-x86_64.sh
+        sudo ./bazel-0.29.1-installer-linux-x86_64.sh
+    - name: bench
+      run: bazel run //:bench
