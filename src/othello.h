@@ -171,8 +171,9 @@ public:
         while ( ((uint64_t)mem.size())*sizeof(mem[0])*8ULL<(ma+mb)*((uint64_t)L) )
             mem.push_back(0);
 
-
+        #ifndef NO_OUTPUT
         cout << "Building" <<endl;
+        #endif
         trycount = 0;
         while ( (!build) && (hl1<=31&&hl2<=31)) {
             while ((!build) && (trycount<MAX_REHASH)) {
@@ -197,12 +198,17 @@ public:
                 trycount = 0;
             }
         }
+        #ifndef NO_OUTPUT
         printf("%08x %08x\n", Ha.s, Hb.s);
-        if (build)
+        #endif
+        if (build) {
+            #ifndef DO_NOT_PRINT_SPACE
             cout << "Succ " << human(keycount) <<" Keys, ma/mb = " << human(ma) <<"/"<<human(mb) <<" keyT"<< sizeof(keyType)*8<<"b  valueT" << sizeof(valueType)*8<<"b"<<" L="<<(int) L <<" After "<<trycount << "tries"<< endl;
-
-        else
+            #endif
+        } else {
             cout << "Build Fail!" << endl;
+            assert(false);
+        }            
     }
     //!\brief Construct othello with vectors.
     template<typename VT>
@@ -447,7 +453,9 @@ bool Othello<keyType>::testHash(uint32_t keycount) {
         get_hash(keys[i], ha, hb);
 
         if (disj.sameset(ha,hb)) {
+            #ifndef NO_OUTPUT
             printf("Conflict key %d: %llx\n", i , keys[i]);
+            #endif
             removedKeys.push_back(keys[i]);
             if (removedKeys.size()> allowed_conflicts)
                 return false;

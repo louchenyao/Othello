@@ -21,6 +21,7 @@ cc_binary(
     name = "bench",
     srcs = ["ssfe_benchmarks/othello_bench.cpp"],
     copts = COPTS,
+    defines = ["NO_OUTPUT", "DO_NOT_PRINT_SPACE"],
     deps = [
         ":othello",
         "@benchmark//:benchmark",
