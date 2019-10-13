@@ -1,0 +1,18 @@
+cc_library(
+    name = "othello",
+    hdrs = glob(["src/*.h"]),
+    strip_include_prefix = "src",
+)
+
+COPTS = ["-std=c++17", "-O3", "-march=native"]
+
+cc_test(
+    name = "test",
+    srcs = ["ssfe_benchmarks/othello_test.cpp"],
+    copts = COPTS,
+    deps = [
+        ":othello",
+        "@gtest//:gtest",
+        "@gtest//:gtest_main",
+    ]
+)
