@@ -1,6 +1,6 @@
 #include <benchmark/benchmark.h>
 
-#include "othello.h"
+#include "othello/othello.h"
 
 struct Data {
     uint64_t *keys;

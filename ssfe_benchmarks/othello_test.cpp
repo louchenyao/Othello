@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "othello.h"
+#include "othello/othello.h"
 
 
 

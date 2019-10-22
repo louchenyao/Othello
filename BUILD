@@ -2,6 +2,8 @@ cc_library(
     name = "othello",
     hdrs = glob(["src/*.h"]),
     strip_include_prefix = "src",
+    include_prefix = "othello",
+    visibility = ["//visibility:public"]
 )
 
 COPTS = ["-std=c++17", "-O3", "-march=native",  "-Wall", "-Wextra", "-Werror"]
