@@ -30,7 +30,7 @@ public:
     }
     //! re-initilize the disjoint sets.
     void clear() {
-        for (auto a : *fa)
+        for (auto &a : *fa)
             a = -1;
     }
     void merge(int a, int b) {
@@ -44,9 +44,9 @@ public:
         return ((*fa)[a]==a);
     }
     //! add new keys, so that the total number of elements equal to n.
-    bool resize(int n) {
+    bool resize(size_t n) {
         while (fa->size()<n)
             fa->push_back(-1);
-        
+        return true;
     }
 };

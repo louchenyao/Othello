@@ -4,7 +4,7 @@ cc_library(
     strip_include_prefix = "src",
 )
 
-COPTS = ["-std=c++17", "-O3", "-march=native"]
+COPTS = ["-std=c++17", "-O3", "-march=native",  "-Wall", "-Wextra", "-Werror"]
 
 cc_test(
     name = "test",

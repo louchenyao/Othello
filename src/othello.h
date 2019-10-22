@@ -93,6 +93,7 @@ private:
         va ^= rand();
         va <<=28;
         v = (va ^ rand());
+        return v;
     }
 
     void newHash() {
@@ -123,9 +124,9 @@ private:
     void fillvalue(void *values, uint32_t keycount, size_t valuesize);
     void fillvalueBFS(void *values, size_t valuesize,int root, bool usepublicFilled);
     bool trybuild(void *values, uint32_t keycount, size_t valuesize) {
-        bool succ;
         disj.setLength(ma+mb);
-        if (succ = testHash(keycount)) {
+        bool succ = testHash(keycount);
+        if (succ) {
             fillvalue(values, keycount,valuesize);
         }
         if (autoclear || (!succ))
@@ -448,7 +449,7 @@ bool Othello<keyType>::testHash(uint32_t keycount) {
     if (first == NULL) first = new vector<int32_t> (ma+mb, -1);
     removedKeys.clear();
     disj.clear();
-    for (int i = 0; i < keycount; i++) {
+    for (uint32_t i = 0; i < keycount; i++) {
         if (i>1048576) if ((i & (i-1)) == 0) printf("Tesing keys # %d\n",i);
         get_hash(keys[i], ha, hb);
 
@@ -589,8 +590,8 @@ void Othello<keyType>::fillvalueBFS(void *values, size_t valuesize, int root, bo
             }
 
             bool isfa = (usepublicFilled)?filled[ha]:(s.find(ha)!=s.end());
-            int helse = isfa ? hb : ha;
-            int hthis = isfa ? ha : hb;
+            uint32_t helse = isfa ? hb : ha;
+            uint32_t hthis = isfa ? ha : hb;
             //! m[hthis] is already filled, now fill m[helse].
             valueType valueKid = 0;
             if (values != NULL) {
@@ -622,13 +623,14 @@ void Othello<keyType>::fillvalueBFS(void *values, size_t valuesize, int root, bo
 }
 template< class keyType>
 void Othello<keyType>::fillvalue(void *values, uint32_t keycount, size_t valuesize) {
+    (void)keycount; // unused value
     filled.resize(ma+mb);
     fill(filled.begin(), filled.end(), false);
     if (values == NULL) {
         fillcount.resize((ma+mb)/32);
         fill(fillcount.begin(),fillcount.end(),0);
     }
-    for (int i = 0; i< ma+mb; i++)
+    for (uint32_t i = 0; i< ma+mb; i++)
         if (disj.isroot(i)) {
             valueType vv;
             getrand(vv);
