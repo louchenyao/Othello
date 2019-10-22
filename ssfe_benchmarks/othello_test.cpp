@@ -1,27 +1,21 @@
 #include <gtest/gtest.h>
 
-#include "othello/othello.h"
+#include "othello_wrapper.h"
 
 
 
 TEST(Othello, Basic) {
     int n = 100000;
-    uint64_t *keys = new uint64_t[n];
-    bool *vals = new bool[n];
+    vector<std::pair<uint64_t, bool> > kvs;
     for (int i = 0; i < n; i++) {
-        keys[i] = i;
-        vals[i] = rand()%2;
+        kvs.push_back(make_pair(uint64_t(i), bool(rand()%2)));
     }
 
-    // construct the othello
-    Othello<uint64_t> o(2, keys, n, true, vals, sizeof(bool));
+    OthelloWrapper<uint64_t> o(n);
+    o.build(kvs);
 
     // verify
     for (int i = 0; i < n; i++) {
-        uint32_t ha, hb;
-        EXPECT_EQ(vals[i], (bool)o.query(keys[i], ha, hb));
+        EXPECT_EQ(kvs[i].second, o.query(kvs[i].first));
     }
-
-    delete[] keys;
-    delete[] vals;
 }

@@ -6,6 +6,16 @@ cc_library(
     visibility = ["//visibility:public"]
 )
 
+cc_library(
+    name = "othello_wrapper",
+    hdrs = ["ssfe_benchmarks/othello_wrapper.h"],
+    strip_include_prefix = "ssfe_benchmarks",
+    deps = [
+        ":othello",
+    ],
+    visibility = ["//visibility:public"]
+)
+
 COPTS = ["-std=c++17", "-O3", "-march=native",  "-Wall", "-Wextra", "-Werror"]
 
 cc_test(
@@ -13,7 +23,7 @@ cc_test(
     srcs = ["ssfe_benchmarks/othello_test.cpp"],
     copts = COPTS,
     deps = [
-        ":othello",
+        ":othello_wrapper",
         "@gtest//:gtest",
         "@gtest//:gtest_main",
     ]
