@@ -487,7 +487,7 @@ bool Othello<keyType>::testConnected(int ha0, int hb0) {
         uint32_t ha,hb;
         get_hash(keys[kid], ha, hb);
         if (hb == hb0) return true;
-        int t = (*first)[hb];
+        // int t = (*first)[hb]; // unused
         if (isAtoB) {
             int t = (*first)[hb];
             while (t>=0) {
@@ -717,8 +717,8 @@ double getrate(uint32_t ma, uint32_t mb, uint32_t da, uint32_t db) {
 
 template< class keyType>
 void Othello<keyType>::setAlienPreference(void * values, uint32_t valuesize, int ideal) {
-    int da[] = {1,1,0,-1,-1,-1,0,1};
-    int db[] = {0,1,1,1,0,-1,-1,-1};
+    // int da[] = {1,1,0,-1,-1,-1,0,1}; // unused
+    // int db[] = {0,1,1,1,0,-1,-1,-1}; // unused
     vector< array<int32_t,8> > sa (L, array<int32_t,8>());
     vector< array<int32_t,8> > sb (L, array<int32_t,8>());
     for (int i = 0; i < 8; i++)
@@ -726,8 +726,8 @@ void Othello<keyType>::setAlienPreference(void * values, uint32_t valuesize, int
             sa[j][i] = sb[j][i] =0;
     vector<int32_t> na(L,0),nb(L,0);
     //for (int j =0; j <L; j++) na[j]=nb[j] =0;
-    int emptyA = 0;
-    int emptyB = 0;
+    // int emptyA = 0; // unused
+    // int emptyB = 0; // unused
     if (true) {
         filled.resize(ma+mb);
         fill(filled.begin(),filled.end(),false);

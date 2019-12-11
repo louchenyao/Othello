@@ -261,11 +261,12 @@ public:
     MultivalueFileReaderWriter( const char * fname, uint32_t klength, uint32_t valuelength, bool _isRead) {
         kl = klength;
         vl = valuelength;
+        isRead = _isRead;
         char buf[1024];
         strcpy(buf,fname);
         if (buf[strlen(buf)-1]=='\n')
             buf[strlen(buf)-1] = '\0';
-        if (isRead = _isRead)
+        if (isRead)
             f=fopen(buf,"rb");
         else f = fopen(buf,"wb");
         memset(buf,0,sizeof(buf));
@@ -554,7 +555,7 @@ public:
         // Loop key for these files;
         while (true) {
             keyType key = PQN.top().k;
-            uint32_t id = PQN.top().id;
+            // uint32_t id = PQN.top().id; // unused
             vector<uint16_t> ret;
             if (PQN.top().finished) {
                 for (auto r: readers) { 
@@ -684,7 +685,7 @@ public:
         delete FileReader<keyType,valueType>::helper;
     }
     bool getNext( keyType *k, valueType *v) {
-        int anslevel = 0;
+        // int anslevel = 0; // unused
         keyType key = PQ.top().k;
         vector<int> ret;
         if (PQ.top().finished) {
@@ -699,7 +700,7 @@ public:
             bool finish;
             if (combineMode) {
                 ret.insert(ret.end(),grpTmpValue[tid].begin(),grpTmpValue[tid].end());
-                int ll = grpTmpValue[tid].size();
+                // int ll = grpTmpValue[tid].size(); // unused
          //       printf("   %d keys: (from %d)\t", ll, tid);
            //     for (int i: grpTmpValue[tid])
            //          printf("%x\t",i);
