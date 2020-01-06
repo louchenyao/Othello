@@ -51,5 +51,5 @@ static void BM_othello_query(benchmark::State& state) {
     }
 }
 
-BENCHMARK(BM_othello_query)->Arg(10 * 1000)->Arg(100 * 1000)->Arg(1000 * 1000)->Arg(2 * 1000 * 1000);
-BENCHMARK(BM_othello_build)->Arg(10 * 1000)->Arg(100 * 1000)->Arg(1000 * 1000)->Arg(2 * 1000 * 1000);
+BENCHMARK(BM_othello_query)->Arg(1000)->Arg(1000 * 1000)->Arg(10 * 1000 * 1000)->Arg(20 * 1000 * 1000);
+BENCHMARK(BM_othello_build)->Arg(1000)->Arg(1000 * 1000)->Arg(10 * 1000 * 1000)->Arg(20 * 1000 * 1000);
