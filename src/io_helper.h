@@ -602,7 +602,7 @@ public:
             if (fgets(buf, 4096, fNCBI) == NULL) break; // read a Species
             vector<string> vv = split(buf, '\t');
             if (vv.size()<2) break;
-            for (int i = 0 ; i*3 < vv.size(); i++) {
+            for (int i = 0 ; i*3 < (int)vv.size(); i++) {
                 int localID = atoi(vv[i*3].c_str());
                 NCBI_local[i].push_back(localID);
                 NCBI_ID[i].push_back(vv[i*3+1]);
@@ -621,8 +621,8 @@ public:
             int combineCount = 0;
             vector<string> * fnamesInThisgrp ;
             vector<string> grpfnames;
-            while (curr < fnames.size()) {
-                if (curr + nn < fnames.size())
+            while (curr < (int)fnames.size()) {
+                if (curr + nn < (int)fnames.size())
                     fnamesInThisgrp = new vector<string> (fnames.begin()+curr, fnames.begin()+curr+nn);
                 else
                     fnamesInThisgrp = new vector<string> (fnames.begin()+curr, fnames.end());
@@ -724,7 +724,7 @@ public:
          
         for (int i = 0; i< levelcount; i++) {
             bool flag = true;
-            for (int j = 0; j < ret.size() && flag; j++)
+            for (int j = 0; j < (int)ret.size() && flag; j++)
                 flag = (NCBI_local[i][ret[j]]==NCBI_local[i][ret[0]]);
             if (flag) {
                 *v = localshift[i] + NCBI_local[i][ret[0]];

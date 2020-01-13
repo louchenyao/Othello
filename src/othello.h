@@ -486,7 +486,8 @@ bool Othello<keyType>::testConnected(int ha0, int hb0) {
         q.pop_front();
         uint32_t ha,hb;
         get_hash(keys[kid], ha, hb);
-        if (hb == hb0) return true;
+        // TODO(Chneyao): what is the type of hb0 supposed be?
+        if (hb == (uint32_t)hb0) return true;
         // int t = (*first)[hb]; // unused
         if (isAtoB) {
             int t = (*first)[hb];
